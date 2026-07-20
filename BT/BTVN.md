@@ -12,25 +12,25 @@ async processOrder(dto: CreateOrderDto) {
     for (const item of dto.items) {
       await tx.product.update({
         where: { id: item.productId },
-        // ❌ V2: decrement không kiểm tra "stock >= quantity" → stock âm / oversell
+        // V2: decrement không kiểm tra "stock >= quantity" → stock âm / oversell
         data: { stock: { decrement: item.quantity } },
       });
     }
 
     // 3. Gọi cổng thanh toán
-    // ❌ V1: gọi HTTP ngoài TRONG transaction → giữ lock suốt thời gian chờ mạng
-    // ❌ V4: không idempotency key → retry dễ charge 2 lần
+    // V1: gọi HTTP ngoài TRONG transaction → giữ lock suốt thời gian chờ mạng
+    // V4: không idempotency key → retry dễ charge 2 lần
     const payment = await this.httpService.post(
       'https://gateway.vn/charge',
       { orderId: order.id, amount: dto.total },
     );
 
     // 4. Gửi email xác nhận
-    // ❌ V1: email cũng nằm trong transaction; ❌ V3: gửi trước khi chắc commit
+    // V1: email cũng nằm trong transaction; ❌ V3: gửi trước khi chắc commit
     await this.mailService.sendOrderConfirmation(order.id);
 
     // 5. Cập nhật trạng thái
-    // ❌ V5: FAILED vẫn commit → tồn kho đã trừ cho đơn thất bại, không hoàn lại
+    // V5: FAILED vẫn commit → tồn kho đã trừ cho đơn thất bại, không hoàn lại
     await tx.order.update({
       where: { id: order.id },
       data: { status: payment.ok ? 'PAID' : 'FAILED' },

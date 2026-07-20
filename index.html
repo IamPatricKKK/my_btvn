@@ -3,16 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My BTVN</title>
+  <title>Kho lưu trữ BTVN</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <main>
-    <h1>My BTVN</h1>
-    <p>Bài tập về nhà — trang web tĩnh.</p>
-    <button id="btn">Bấm thử</button>
-    <p id="out"></p>
-  </main>
-  <script src="script.js"></script>
+  <header>
+    <h1>📚 Kho lưu trữ BTVN</h1>
+    <input id="search" type="search" placeholder="Tìm theo tên bài...">
+  </header>
+
+  <nav id="cats"></nav>
+  <main id="grid"></main>
+  <p id="empty" hidden>Chưa có bài nào. Thêm file vào <code>BT/</code> rồi chạy <code>python3 gen.py</code>.</p>
+
+  <!-- Viewer -->
+  <dialog id="viewer">
+    <button id="close" aria-label="Đóng">✕</button>
+    <div id="viewer-body"></div>
+  </dialog>
+
+  <script src="assets/marked.min.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
