@@ -1,10 +1,13 @@
 [
   {
-    "title": "BTVN",
+    "title": "BTVN Transaction",
     "path": "BT/BTVN.md",
     "type": "markdown",
     "ext": "md",
     "category": "chung",
-    "mtime": 1784511975
+    "de": "x",
+    "ngay": "2026-07-11",
+    "nguoi_giao": "Thầy Tài",
+    "mtime": 1784515232
   }
 ]

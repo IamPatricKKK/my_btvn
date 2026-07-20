@@ -2,11 +2,16 @@
 
 UI web tĩnh để sắp xếp và xem bài tập về nhà (markdown, ảnh, code, pdf).
 
+Mỗi bài có: tên, đề, nội dung, ngày, người giao — **chỉnh sửa trực tiếp trên web** (nút ✏️ Sửa), lưu thẳng vào file.
+
 ## Dùng
 
 1. Bỏ file bài tập vào thư mục `BT/` (có thể chia thư mục con làm danh mục, vd `BT/transaction/`).
-2. Chạy `python3 gen.py` để sinh lại `homework.json`.
-3. Mở giao diện: `python3 -m http.server 8000` rồi vào http://localhost:8000/
+2. Chạy `python3 serve.py` rồi vào http://localhost:8000/
+3. Bấm vào thẻ bài để xem; nút **✏️ Sửa** để chỉnh tên/đề/ngày/người giao/nội dung → **Lưu** ghi vào file + `meta.json`.
+
+> Chỉnh sửa cần chạy `serve.py` (server nội bộ). Xem online (GitHub Pages) chỉ đọc, không sửa.
+> Metadata lưu ở `meta.json`; nội dung bài text lưu ngay trong file gốc.
 
 ## Cấu trúc
 
